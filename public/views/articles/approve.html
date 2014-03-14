@@ -1,0 +1,23 @@
+<section data-ng-controller="ArticlesController" data-ng-init="findNotApproved()">
+    <ul class="articles unstyled">
+        <li data-ng-repeat="article in articles">
+            <span>{{article.created | date:'medium'}}</span> /
+            <span>{{article.user.name}}</span>
+
+            <h2><a data-ng-href="#!/articles/{{article._id}}">{{article.title}}</a></h2>
+
+            <div>
+                <a class="btn" href="/#!/articles/{{article._id}}/edit">
+                    <i class="glyphicon glyphicon-edit"></i>
+                </a>
+                <a class="btn" data-ng-click="approve(article._id)">
+                    <i class="glyphicon glyphicon-ok"></i>
+                </a>
+                <a class="btn" data-ng-click="remove();">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </a>
+            </div>
+            <div>{{article.content}}</div>
+        </li>
+    </ul>
+</section>

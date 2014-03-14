@@ -11,8 +11,8 @@ var mongoose = require('mongoose'),
 /**
  * Find article by id
  */
-exports.article = function(req, res, next, id) {
-    Article.load(id, function(err, article) {
+exports.article = function (req, res, next, id) {
+    Article.load(id, function (err, article) {
         if (err) return next(err);
         if (!article) return next(new Error('Failed to load article ' + id));
         req.article = article;
@@ -23,11 +23,11 @@ exports.article = function(req, res, next, id) {
 /**
  * Create an article
  */
-exports.create = function(req, res) {
+exports.create = function (req, res) {
     var article = new Article(req.body);
     article.user = req.user;
 
-    article.save(function(err) {
+    article.save(function (err) {
         if (err) {
             return res.send('users/signup', {
                 errors: err.errors,
@@ -42,12 +42,12 @@ exports.create = function(req, res) {
 /**
  * Update an article
  */
-exports.update = function(req, res) {
+exports.update = function (req, res) {
     var article = req.article;
 
     article = _.extend(article, req.body);
 
-    article.save(function(err) {
+    article.save(function (err) {
         if (err) {
             return res.send('users/signup', {
                 errors: err.errors,
@@ -62,10 +62,10 @@ exports.update = function(req, res) {
 /**
  * Delete an article
  */
-exports.destroy = function(req, res) {
+exports.destroy = function (req, res) {
     var article = req.article;
 
-    article.remove(function(err) {
+    article.remove(function (err) {
         if (err) {
             return res.send('users/signup', {
                 errors: err.errors,
@@ -80,15 +80,15 @@ exports.destroy = function(req, res) {
 /**
  * Show an article
  */
-exports.show = function(req, res) {
+exports.show = function (req, res) {
     res.jsonp(req.article);
 };
 
 /**
  * List of Articles
  */
-exports.all = function(req, res) {
-    Article.find().sort('-created').populate('user', 'name username').exec(function(err, articles) {
+exports.all = function (req, res) {
+    Article.find().sort('-created').populate('user', 'name username').exec(function (err, articles) {
         if (err) {
             res.render('error', {
                 status: 500
@@ -98,3 +98,36 @@ exports.all = function(req, res) {
         }
     });
 };
+
+
+/**
+ * List of Articles
+ */
+exports.approved = function (req, res) {
+    Article.find({ 'approved': true}).sort('-created').populate('user', 'name username').exec(function (err, articles) {
+        if (err) {
+            res.render('error', {
+                status: 500
+            });
+        } else {
+            res.jsonp(articles);
+        }
+    });
+};
+
+
+/**
+ * List of Articles
+ */
+exports.approve = function (req, res) {
+    Article.find({ 'approved': false }).sort('-created').populate('user', 'name username').exec(function (err, articles) {
+        if (err) {
+            res.render('error', {
+                status: 500
+            });
+        } else {
+            res.jsonp(articles);
+        }
+    });
+};
+

@@ -28,20 +28,24 @@ var ArticleSchema = new Schema({
     user: {
         type: Schema.ObjectId,
         ref: 'User'
+    },
+    approved: {
+        type: Boolean,
+        default: false
     }
 });
 
 /**
  * Validations
  */
-ArticleSchema.path('title').validate(function(title) {
+ArticleSchema.path('title').validate(function (title) {
     return title.length;
 }, 'Title cannot be blank');
 
 /**
  * Statics
  */
-ArticleSchema.statics.load = function(id, cb) {
+ArticleSchema.statics.load = function (id, cb) {
     this.findOne({
         _id: id
     }).populate('user', 'name username').exec(cb);

@@ -1,14 +1,14 @@
 'use strict';
 
-angular.module('mean.articles').controller('ArticlesController', ['$scope', '$routeParams', '$location', 'Global', 'Articles', function ($scope, $routeParams, $location, Global, Articles) {
+angular.module('mean.articles').controller('ArticlesController', ['$scope', '$routeParams', '$location', 'Global', 'Articles', 'Articlesadmin', function ($scope, $routeParams, $location, Global, Articles, Articlesadmin) {
     $scope.global = Global;
 
-    $scope.create = function() {
+    $scope.create = function () {
         var article = new Articles({
             title: this.title,
             content: this.content
         });
-        article.$save(function(response) {
+        article.$save(function (response) {
             $location.path('articles/' + response._id);
         });
 
@@ -16,7 +16,7 @@ angular.module('mean.articles').controller('ArticlesController', ['$scope', '$ro
         this.content = '';
     };
 
-    $scope.remove = function(article) {
+    $scope.remove = function (article) {
         if (article) {
             article.$remove();
 
@@ -32,28 +32,45 @@ angular.module('mean.articles').controller('ArticlesController', ['$scope', '$ro
         }
     };
 
-    $scope.update = function() {
+    $scope.update = function () {
         var article = $scope.article;
         if (!article.updated) {
             article.updated = [];
         }
         article.updated.push(new Date().getTime());
 
-        article.$update(function() {
+        article.$update(function () {
             $location.path('articles/' + article._id);
         });
     };
 
-    $scope.find = function() {
-        Articles.query(function(articles) {
+    $scope.find = function () {
+        Articles.query(function (articles) {
             $scope.articles = articles;
         });
     };
 
-    $scope.findOne = function() {
+
+    $scope.findNotApproved = function () {
+        $scope.articles = Articlesadmin.findNotApproved(function (articles) {
+            $scope.articles = articles;
+        });
+    };
+
+
+    $scope.findOne = function () {
         Articles.get({
             articleId: $routeParams.articleId
-        }, function(article) {
+        }, function (article) {
+            $scope.article = article;
+        });
+    };
+
+
+    $scope.approve = function () {
+        Articles.get({
+            articleId: $routeParams.articleId
+        }, function (article) {
             $scope.article = article;
         });
     };

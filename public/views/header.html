@@ -3,8 +3,14 @@
         <li>
             <a class="navbar-brand" href="/">7ticks - Thinking out loud</a>
         </li>
-        <li data-ng-repeat="item in menu" data-ng-show="global.user" ui-route="/{{item.link}}" ng-class="{active: $uiRoute}">
+        <!--li data-ng-repeat="item in menu" data-ng-show="global.user" ui-route="/{{item.link}}" ng-class="{active: $uiRoute}">
             <a href="#!/{{item.link}}">{{item.title}}</a>
+        </li-->
+        <li data-ng-repeat="item in menu" ui-route="/{{item.link}}" ng-class="{active: $uiRoute}">
+            <a href="#!/{{item.link}}">{{item.title}}</a>
+        </li>
+        <li data-ng-show="global.user.admin" ui-route="#!/articles/approvelist" ng-class="{active: $uiRoute}">
+            <a href="#!/articles/approvelist">Approve</a>
         </li>
     </ul>
     <ul class="navbar-nav nav pull-right" data-ng-hide="global.authenticated">

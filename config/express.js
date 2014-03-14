@@ -10,18 +10,18 @@ var express = require('express'),
     helpers = require('view-helpers'),
     config = require('./config');
 
-module.exports = function(app, passport, db) {
+module.exports = function (app, passport, db) {
     app.set('showStackError', true);
 
     // Prettify HTML
     app.locals.pretty = true;
-		// cache=memory or swig dies in NODE_ENV=production
-		app.locals.cache = 'memory';
-		
+    // cache=memory or swig dies in NODE_ENV=production
+    app.locals.cache = 'memory';
+
     // Should be placed before express.static
     // To ensure that all assets and data are compressed (utilize bandwidth)
     app.use(express.compress({
-        filter: function(req, res) {
+        filter: function (req, res) {
             return (/json|text|javascript|css/).test(res.getHeader('Content-Type'));
         },
         // Levels are specified in a range of 0 to 9, where-as 0 is
@@ -46,7 +46,7 @@ module.exports = function(app, passport, db) {
     // Enable jsonp
     app.enable('jsonp callback');
 
-    app.configure(function() {
+    app.configure(function () {
         // The cookieParser should be above session
         app.use(express.cookieParser());
 
@@ -84,7 +84,7 @@ module.exports = function(app, passport, db) {
         // Assume "not found" in the error msgs is a 404. this is somewhat
         // silly, but valid, you can do whatever you like, set properties,
         // use instanceof etc.
-        app.use(function(err, req, res, next) {
+        app.use(function (err, req, res, next) {
             // Treat as 404
             if (~err.message.indexOf('not found')) return next();
 
@@ -98,7 +98,7 @@ module.exports = function(app, passport, db) {
         });
 
         // Assume 404 since no middleware responded
-        app.use(function(req, res) {
+        app.use(function (req, res) {
             res.status(404).render('404', {
                 url: req.originalUrl,
                 error: 'Not found'

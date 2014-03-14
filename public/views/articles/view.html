@@ -11,4 +11,7 @@
         </a>
     </div>
     <div>{{article.content}}</div>
+    <div data-ng-show="global.user.admin">
+        <a href="#!/articles/approvelist">Back to Approved List</a>
+    </div>
 </section>
