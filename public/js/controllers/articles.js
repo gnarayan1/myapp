@@ -32,6 +32,22 @@ angular.module('mean.articles').controller('ArticlesController', ['$scope', '$ro
         }
     };
 
+
+    $scope.removeFromList = function (articleId) {
+        Articles.get({
+            articleId: articleId
+        }, function (article) {
+            article.$remove();
+
+            for (var i in $scope.articles) {
+                if ($scope.articles[i]._id === article._id) {
+                    $scope.articles.splice(i, 1);
+                }
+            }
+        });
+
+    };
+
     $scope.update = function () {
         var article = $scope.article;
         if (!article.updated) {
@@ -67,11 +83,21 @@ angular.module('mean.articles').controller('ArticlesController', ['$scope', '$ro
     };
 
 
-    $scope.approve = function () {
+    $scope.approve = function (articleId) {
+        alert('appriving '+articleId);
         Articles.get({
-            articleId: $routeParams.articleId
+            articleId: articleId
         }, function (article) {
-            $scope.article = article;
+            article.approved = true;
+            article.$update(function () {
+                for (var i in $scope.articles) {
+                    if ($scope.articles[i]._id === article._id) {
+                        $scope.articles.splice(i, 1);
+                    }
+                }
+                $location.path('articles/approvelist');
+            });
+
         });
     };
 }]);

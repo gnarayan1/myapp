@@ -11,7 +11,7 @@ angular.module('mean').config(['$routeProvider',
                 templateUrl: 'views/articles/create.html'
             }).
             when('/articles/approvelist', {
-                templateUrl: 'views/articles/approve.html'
+                templateUrl: 'views/articles/approvelist.html'
             }).
             when('/articles/:articleId/edit', {
                 templateUrl: 'views/articles/edit.html'

@@ -2,7 +2,7 @@
     <span>{{article.created | date:'medium'}}</span> /
     <span>{{article.user.name}}</span>
     <h2>{{article.title}}</h2>
-    <div data-ng-show="global.user._id == article.user._id">
+    <div data-ng-show="global.user && ((article.user && global.user._id == article.user._id) || global.user.admin == true)">
         <a class="btn" href="/#!/articles/{{article._id}}/edit">
         	<i class="glyphicon glyphicon-edit"></i>
         </a>
@@ -11,7 +11,8 @@
         </a>
     </div>
     <div>{{article.content}}</div>
-    <div data-ng-show="global.user.admin">
-        <a href="#!/articles/approvelist">Back to Approved List</a>
+
+    <div style="display: inline-block">
+        <a href="#!/articles">Back to Approved Topics</a><span data-ng-show="global.user.admin">   |   </span><a data-ng-show="global.user.admin" href="#!/articles/approvelist">Back to Unapproved Topics</a>
     </div>
 </section>

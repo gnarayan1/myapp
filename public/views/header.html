@@ -1,17 +1,12 @@
 <div class="" data-ng-controller="HeaderController">
     <ul class="navbar-nav nav">
         <li>
-            <a class="navbar-brand" href="/">7ticks - Thinking out loud</a>
+             <a class="navbar-brand" href="/"><img src="img/transparent_logo.png"/><br>7ticks - Thinking out loud</a>
         </li>
         <!--li data-ng-repeat="item in menu" data-ng-show="global.user" ui-route="/{{item.link}}" ng-class="{active: $uiRoute}">
             <a href="#!/{{item.link}}">{{item.title}}</a>
         </li-->
-        <li data-ng-repeat="item in menu" ui-route="/{{item.link}}" ng-class="{active: $uiRoute}">
-            <a href="#!/{{item.link}}">{{item.title}}</a>
-        </li>
-        <li data-ng-show="global.user.admin" ui-route="#!/articles/approvelist" ng-class="{active: $uiRoute}">
-            <a href="#!/articles/approvelist">Approve</a>
-        </li>
+
     </ul>
     <ul class="navbar-nav nav pull-right" data-ng-hide="global.authenticated">
         <li><a href="signup">Signup</a>
@@ -31,4 +26,38 @@
             </ul>
         </li>
     </ul>
+
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Topics <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#!/articles">View Topics</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#!/articles/create">Add Topic</a></li>
+                    <li class="divider"></li>
+                    <li data-ng-show="global.user.admin"><a href="#!/articles/approvelist">Approve Topic</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">News <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">View News</a></li>
+                    <li class="divider"></li>
+                    <li data-ng-show="global.authenticated"><a href="#">Add News</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Recognition <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">View Recognition</a></li>
+                    <li class="divider"></li>
+                    <li data-ng-show="global.authenticated"><a href="#">Add Recognition</a></li>
+                </ul>
+            </li>
+        </ul>
+
+    </div>
 </div>

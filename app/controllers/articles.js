@@ -119,7 +119,7 @@ exports.approved = function (req, res) {
 /**
  * List of Articles
  */
-exports.approve = function (req, res) {
+exports.approvelist = function (req, res) {
     Article.find({ 'approved': false }).sort('-created').populate('user', 'name username').exec(function (err, articles) {
         if (err) {
             res.render('error', {

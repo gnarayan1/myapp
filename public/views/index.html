@@ -1,3 +1,30 @@
 <section data-ng-controller="IndexController">
-    <h1>Welcome to 7ticks Appreciation Site</h1>
+    <h2>Welcome to 7ticks Appreciation Site</h2>
+    <br/><br/>
+    <table align="left" style=" border-spacing: 50px 10px;border-collapse: separate">
+        <thead>
+            <tr align="left">
+                <td><h4>Topics</h4></td>
+                <td><h4>News</h4></td>
+                <td><h4>Recognition</h4></td>
+            </tr>
+        </thead>
+        <tbody>
+        <tr align="left">
+            <td>
+                <a href="#!/articles">View Topics</a><br/>
+                <a href="#!/articles/create">Add Topic</a><br/>
+                <a data-ng-show="global.user.admin" href="#!/articles/approvelist">Approve Topic</a>
+            </td>
+            <td>
+                <a href="#!/">View News</a><br/>
+                <a data-ng-show="global.user.admin" href="#!/">Add News</a><br/>
+            </td>
+            <td>
+                <a href="#!/">View Recognition</a><br/>
+                <a href="#!/">Add Recognition</a><br/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </section>
