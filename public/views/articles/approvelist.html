@@ -2,6 +2,7 @@
     <div data-ng-hide="articles"><h3>Nothing to approve</h3></div>
     <ul class="articles unstyled">
         <li data-ng-repeat="article in articles">
+
             <span>{{article.created | date:'medium'}}</span> /
             <span>{{article.user.name}}</span>
 
