@@ -1,15 +1,25 @@
 <section data-ng-controller="ArticlesController" data-ng-init="findOne()">
-	<form class="form-horizontal col-md-6" role="form" data-ng-submit="update()">
+	<form class="form-horizontal col-md-6" name="articleform" role="form" data-ng-submit="update()">
+        <div class="form-group"
+             ng-show="(clicked && (articleform.title.$invalid ||  articleform.category.$invalid || articleform.content.$invalid))">
+            <span style="color: red" class="text-error">Please enter title, content, and select category.</span>
+        </div>
 		<div class="form-group">
 			<label for="title" class="col-md-2 control-label">Title</label>
 			<div class="col-md-10">
-				<input type="text" class="form-control" data-ng-model="article.title" id="title" placeholder="Title" required>
+				<input  name="title" type="text" class="form-control" data-ng-model="article.title" id="title" placeholder="Title" required>
 			</div>
 		</div>
+        <div class="form-group">
+            <label for="category" class="col-md-2 control-label">Category</label>
+            <div class="col-md-10">
+                <select name="category" id="category" data-ng-model="article.category" data-ng-options="c for c in categories" required></select>
+            </div>
+        </div>
 		<div class="form-group">
 			<label for="content" class="col-md-2 control-label">Content</label>
 			<div class="col-md-10">
-				<textarea data-ng-model="article.content" id="content" cols="30" rows="10" placeholder="Content" class="form-control" required></textarea>
+				<textarea name="content"  data-ng-model="article.content" id="content" cols="30" rows="10" placeholder="Content" class="form-control" required></textarea>
 			</div>
 		</div>
 		<div class="form-group">

@@ -2,12 +2,12 @@
     <div data-ng-hide="articles"><h3>Nothing to approve</h3></div>
     <ul class="articles unstyled">
         <li data-ng-repeat="article in articles">
-
-            <span>{{article.created | date:'medium'}}</span> /
+            <span><timer interval="1000" countdown="getInterval(article.created)">{{days}} days,{{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.</timer></span>
+            <br><span>{{article.created | date:'medium'}}</span>
             <span>{{article.user.name}}</span>
 
             <h2><a data-ng-href="#!/articles/{{article._id}}">{{article.title}}</a></h2>
-
+            <span>Category: {{article.category}}</span><br>
             <div>
                 <a class="btn" href="/#!/articles/{{article._id}}/edit">
                     <i class="glyphicon glyphicon-edit"></i>

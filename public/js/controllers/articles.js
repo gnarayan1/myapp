@@ -3,6 +3,44 @@
 angular.module('mean.articles').controller('ArticlesController', ['$scope', '$routeParams', '$location', 'Global', 'Articles', 'Articlesadmin', function ($scope, $routeParams, $location, Global, Articles, Articlesadmin) {
     $scope.global = Global;
 
+    $scope.clicked = false;
+
+    $scope.intervalInMillis = 86400*1000*5; // 5 days in millis
+
+    $scope.categories = ['Staffing/HR', 'Organizational', 'Performance/Goals', 'Idea/Food for thought', 'Technology', 'Customer Concerns'  ];
+
+    function parseISO8601(str) {
+        // we assume str is a UTC date ending in 'Z'
+
+        var parts = str.split('T'),
+            dateParts = parts[0].split('-'),
+            timeParts = parts[1].split('Z'),
+            timeSubParts = timeParts[0].split(':'),
+            timeSecParts = timeSubParts[2].split('.'),
+            timeHours = Number(timeSubParts[0]),
+            _date = new Date;
+
+        _date.setUTCFullYear(Number(dateParts[0]));
+        _date.setUTCMonth(Number(dateParts[1])-1);
+        _date.setUTCDate(Number(dateParts[2]));
+        _date.setUTCHours(Number(timeHours));
+        _date.setUTCMinutes(Number(timeSubParts[1]));
+        _date.setUTCSeconds(Number(timeSecParts[0]));
+        if (timeSecParts[1]) _date.setUTCMilliseconds(Number(timeSecParts[1]));
+
+        // by using setUTC methods the date has already been converted to local time(?)
+        return _date;
+    }
+
+    $scope.getInterval = function (createDate) {
+
+        var createPlus5 = parseISO8601(createDate).getMilliseconds()+$scope.intervalInMillis;
+        var currDateinMillis = (new Date()).getMilliseconds();
+        var diff =  createPlus5 - currDateinMillis;
+        //console.log(diff);
+        return diff/1000;
+    }
+
     $scope.create = function () {
         var article = new Articles({
             title: this.title,
@@ -49,6 +87,9 @@ angular.module('mean.articles').controller('ArticlesController', ['$scope', '$ro
     };
 
     $scope.update = function () {
+        $scope.clicked = false;
+
+        if ($scope.articleform.$valid) {
         var article = $scope.article;
         if (!article.updated) {
             article.updated = [];
@@ -58,6 +99,9 @@ angular.module('mean.articles').controller('ArticlesController', ['$scope', '$ro
         article.$update(function () {
             $location.path('articles/' + article._id);
         });
+        } else {
+            $scope.clicked = true;
+        }
     };
 
     $scope.find = function () {

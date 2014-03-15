@@ -32,6 +32,11 @@ var ArticleSchema = new Schema({
     approved: {
         type: Boolean,
         default: false
+    },
+    category: {
+        type: String,
+        default: '',
+        trim: true
     }
 });
 
