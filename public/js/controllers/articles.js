@@ -128,11 +128,11 @@ angular.module('mean.articles').controller('ArticlesController', ['$scope', '$ro
 
 
     $scope.approve = function (articleId) {
-        alert('appriving '+articleId);
         Articles.get({
             articleId: articleId
         }, function (article) {
             article.approved = true;
+            article.approvedate.push(new Date().getTime());
             article.$update(function () {
                 for (var i in $scope.articles) {
                     if ($scope.articles[i]._id === article._id) {

@@ -15,6 +15,14 @@ var ArticleSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    approvedate: {
+        type: Date,
+        default: Date.now
+    },
+    answereddate: {
+        type: Date,
+        default: Date.now
+    },
     title: {
         type: String,
         default: '',
@@ -30,6 +38,10 @@ var ArticleSchema = new Schema({
         ref: 'User'
     },
     approved: {
+        type: Boolean,
+        default: false
+    },
+    answered: {
         type: Boolean,
         default: false
     },
