@@ -28,6 +28,9 @@ var UserSchema = new Schema({
     admin: {
         type: Boolean,
         default: false
+    },
+    answercats: {
+        type: Array
     }
 });
 

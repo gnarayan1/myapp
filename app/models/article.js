@@ -49,6 +49,11 @@ var ArticleSchema = new Schema({
         type: String,
         default: '',
         trim: true
+    },
+    answer: {
+        type: String,
+        default: '',
+        trim: true
     }
 });
 
