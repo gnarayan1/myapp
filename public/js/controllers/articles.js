@@ -112,9 +112,11 @@ angular.module('mean.articles').controller('ArticlesController', ['$scope', '$ro
 
 
     $scope.findNotApproved = function () {
+        $scope.selCategory = $scope.categories[0];
         $scope.articles = Articlesadmin.findNotApproved(function (articles) {
             $scope.articles = articles;
         });
+        //$scope.categories =
     };
 
 
@@ -127,11 +129,12 @@ angular.module('mean.articles').controller('ArticlesController', ['$scope', '$ro
     };
 
 
-    $scope.approve = function (articleId) {
+    $scope.approve = function (articleId, selCategory) {
         Articles.get({
             articleId: articleId
         }, function (article) {
             article.approved = true;
+            article.category = selCategory;
             article.approvedate = new Date().getTime();
             article.$update(function () {
                 for (var i in $scope.articles) {
@@ -143,5 +146,6 @@ angular.module('mean.articles').controller('ArticlesController', ['$scope', '$ro
             });
 
         });
+        $scope.selCategory = $scope.categories[0];
     };
 }]);

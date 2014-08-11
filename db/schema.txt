@@ -1,0 +1,8 @@
+db.categories.insert( { name: "Staffing/HR" } )
+db.categories.insert( { name: "Organizational" } )
+db.categories.insert( { name: "Performance/Goals" } )
+db.categories.insert( { name: "Idea/Food for thought" } )
+db.categories.insert( { name: "Technology" } )
+db.categories.insert( { name: "Customer Concerns" } )
+
+

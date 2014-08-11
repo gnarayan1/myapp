@@ -20,4 +20,12 @@ angular.module('mean.articles').service('Articlesadmin', ['$http', function ($ht
     };
 
 
+    this.categories = function (success) {
+        $http({method: 'GET', url: 'categories/all'}).
+            success(function (data) {
+                success(data);
+            });
+    };
+
+
 }]);

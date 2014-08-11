@@ -7,6 +7,7 @@
             <h2><a data-ng-href="#!/articles/{{article._id}}">{{article.title}}</a></h2>
 
             <div>{{article.content}}</div>
+            <div>Category: {{article.category}}</div>
         </li>
     </ul>
     <h1 data-ng-hide="!articles || articles.length">No topics yet. <br> Why don't you <a href="/#!/articles/create">Create
