@@ -35,8 +35,9 @@ angular.module('mean.articles').controller('NewsController', ['$scope', '$routeP
         }
         else {
             $scope.news.$remove();
-            $location.path('news');
+
         }
+        $location.path('news');
     };
 
 
