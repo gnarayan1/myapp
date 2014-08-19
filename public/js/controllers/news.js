@@ -27,9 +27,9 @@ angular.module('mean.articles').controller('NewsController', ['$scope', '$routeP
         if (news) {
             news.$remove();
 
-            for (var i in $scope.news) {
-                if ($scope.news[i] === news) {
-                    $scope.news.splice(i, 1);
+            for (var i in $scope.newsitems) {
+                if ($scope.newsitems[i] === news) {
+                    $scope.newsitems.splice(i, 1);
                 }
             }
         }
@@ -46,9 +46,9 @@ angular.module('mean.articles').controller('NewsController', ['$scope', '$routeP
         }, function (news) {
             news.$remove();
 
-            for (var i in $scope.news) {
-                if ($scope.news[i]._id === news._id) {
-                    $scope.news.splice(i, 1);
+            for (var i in $scope.newsitems) {
+                if ($scope.newsitems[i]._id === news._id) {
+                    $scope.newsitems.splice(i, 1);
                 }
             }
         });
