@@ -1,0 +1,29 @@
+<section data-ng-controller="NewsController" data-ng-init="findNotApproved()">
+    <div data-ng-hide="news"><h3>Nothing to approve</h3></div>
+    <ul class="articles unstyled">
+        <li data-ng-repeat="news in newsitems">
+            <span><timer interval="1000" countdown="getInterval(news.created)">{{days}} days,{{hours}} hours,
+                {{minutes}} minutes, {{seconds}} seconds.
+            </timer></span>
+            <br><span>{{news.created | date:'medium'}}</span>
+            <span>{{article.user.name}}</span>
+
+            <h2><a data-ng-href="#!/news/{{news._id}}">{{news.title}}</a></h2>
+            <span>Category: <select ng-model="selCategory"
+                                    ng-options="category for category in categories"></select></span><br>
+
+            <div>
+                <a class="btn" href="/#!/news/{{news._id}}/edit">
+                    <i class="glyphicon glyphicon-edit"></i>
+                </a>
+                <a class="btn" data-ng-click="approve(news._id, selCategory)">
+                    <i class="glyphicon glyphicon-ok"></i>
+                </a>
+                <a class="btn" data-ng-click="removeFromList(news._id);">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </a>
+            </div>
+            <div>{{news.content}}</div>
+        </li>
+    </ul>
+</section>

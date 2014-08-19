@@ -1,0 +1,21 @@
+<section data-ng-controller="NewsController" data-ng-init="findOne()">
+    <span>{{news.created | date:'medium'}}</span> /
+    <span>{{news.user.name}}</span>
+
+    <h2>{{news.title}}</h2>
+
+    <div data-ng-show="global.user && ((news.user && global.user._id == news.user._id) || global.user.admin == true)">
+        <a class="btn" href="/#!/news/{{news._id}}/edit">
+            <i class="glyphicon glyphicon-edit"></i>
+        </a>
+        <a class="btn" data-ng-click="remove();">
+            <i class="glyphicon glyphicon-trash"></i>
+        </a>
+    </div>
+    <div>{{news.content}}</div>
+
+    <div style="display: inline-block">
+        <a href="#!/news">Back to Approved Topics</a><span data-ng-show="global.user.admin">   |   </span><a
+            data-ng-show="global.user.admin" href="#!/newss/approvelist">Back to Unapproved News</a>
+    </div>
+</section>

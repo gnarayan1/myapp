@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mean.articles').controller('ArticlesController', ['$scope', '$routeParams', '$location', 'Global', 'Articles', 'Articlesadmin', function ($scope, $routeParams, $location, Global, Articles, Articlesadmin) {
+angular.module('mean.news').controller('NewsController', ['$scope', '$routeParams', '$location', 'Global', 'News', 'Newsadmin', function ($scope, $routeParams, $location, Global, News, Newsadmin) {
     $scope.global = Global;
 
     $scope.clicked = false;
@@ -42,44 +42,44 @@ angular.module('mean.articles').controller('ArticlesController', ['$scope', '$ro
     }
 
     $scope.create = function () {
-        var article = new Articles({
+        var news = new News({
             title: this.title,
             content: this.content
         });
-        article.$save(function (response) {
-            $location.path('articles/' + response._id);
+        news.$save(function (response) {
+            $location.path('news/' + response._id);
         });
 
         this.title = '';
         this.content = '';
     };
 
-    $scope.remove = function (article) {
-        if (article) {
-            article.$remove();
+    $scope.remove = function (news) {
+        if (news) {
+            news.$remove();
 
-            for (var i in $scope.articles) {
-                if ($scope.articles[i] === article) {
-                    $scope.articles.splice(i, 1);
+            for (var i in $scope.news) {
+                if ($scope.news[i] === news) {
+                    $scope.news.splice(i, 1);
                 }
             }
         }
         else {
-            $scope.article.$remove();
-            $location.path('articles');
+            $scope.news.$remove();
+            $location.path('news');
         }
     };
 
 
-    $scope.removeFromList = function (articleId) {
-        Articles.get({
-            articleId: articleId
-        }, function (article) {
-            article.$remove();
+    $scope.removeFromList = function (newsId) {
+        News.get({
+            newsId: newsId
+        }, function (news) {
+            news.$remove();
 
-            for (var i in $scope.articles) {
-                if ($scope.articles[i]._id === article._id) {
-                    $scope.articles.splice(i, 1);
+            for (var i in $scope.news) {
+                if ($scope.news[i]._id === news._id) {
+                    $scope.news.splice(i, 1);
                 }
             }
         });
@@ -89,15 +89,15 @@ angular.module('mean.articles').controller('ArticlesController', ['$scope', '$ro
     $scope.update = function () {
         $scope.clicked = false;
 
-        if ($scope.articleform.$valid) {
-            var article = $scope.article;
-            if (!article.updated) {
-                article.updated = [];
+        if ($scope.newsform.$valid) {
+            var news = $scope.news;
+            if (!news.updated) {
+                news.updated = [];
             }
-            article.updated.push(new Date().getTime());
+            news.updated.push(new Date().getTime());
 
-            article.$update(function () {
-                $location.path('articles/' + article._id);
+            news.$update(function () {
+                $location.path('news/' + news._id);
             });
         } else {
             $scope.clicked = true;
@@ -105,44 +105,44 @@ angular.module('mean.articles').controller('ArticlesController', ['$scope', '$ro
     };
 
     $scope.find = function () {
-        Articles.query(function (articles) {
-            $scope.articles = articles;
+        News.query(function (news) {
+            $scope.news = news;
         });
     };
 
 
     $scope.findNotApproved = function () {
         $scope.selCategory = $scope.categories[0];
-        $scope.articles = Articlesadmin.findNotApproved(function (articles) {
-            $scope.articles = articles;
+        $scope.news = Newsadmin.findNotApproved(function (news) {
+            $scope.news = news;
         });
         //$scope.categories =
     };
 
 
     $scope.findOne = function () {
-        Articles.get({
-            articleId: $routeParams.articleId
-        }, function (article) {
-            $scope.article = article;
+        News.get({
+            newsId: $routeParams.newsId
+        }, function (news) {
+            $scope.news = news;
         });
     };
 
 
-    $scope.approve = function (articleId, selCategory) {
-        Articles.get({
-            articleId: articleId
-        }, function (article) {
-            article.approved = true;
-            article.category = selCategory;
-            article.approvedate = new Date().getTime();
-            article.$update(function () {
-                for (var i in $scope.articles) {
-                    if ($scope.articles[i]._id === article._id) {
-                        $scope.articles.splice(i, 1);
+    $scope.approve = function (newsId, selCategory) {
+        News.get({
+            newsId: newsId
+        }, function (news) {
+            news.approved = true;
+            news.category = selCategory;
+            news.approvedate = new Date().getTime();
+            news.$update(function () {
+                for (var i in $scope.news) {
+                    if ($scope.news[i]._id === news._id) {
+                        $scope.news.splice(i, 1);
                     }
                 }
-                $location.path('articles/approvelist');
+                $location.path('news/approvelist');
             });
 
         });
