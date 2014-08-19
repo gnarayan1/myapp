@@ -8,8 +8,16 @@
 
             <div>{{news.content}}</div>
             <div>Category: {{news.category}}</div>
+            <div data-ng-show="global.user && ((news.user && global.user._id == news.user._id) || global.user.admin == true)">
+                <a class="btn" href="/#!/news/{{news._id}}/edit">
+                    <i class="glyphicon glyphicon-edit"></i>
+                </a>
+                <a class="btn" data-ng-click="remove();">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </a>
+            </div>
         </li>
     </ul>
-    <h1 data-ng-hide="!newsitems || newsitems.length">No topics yet. <br> Why don't you <a href="/#!/news/create">Create
+    <h1 data-ng-hide="!newsitems || newsitems.length">No News yet. <br> Why don't you <a href="/#!/news/create">Create
         One</a>?</h1>
 </section>

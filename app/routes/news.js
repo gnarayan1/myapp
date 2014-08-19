@@ -38,7 +38,7 @@ var isAdminOrAuthorized = function (req, res, next) {
 module.exports = function (app) {
 
     //app.get('/articles', articles.all);
-    app.get('/news', news.approved);
+    app.get('/news', news.all);
     app.get('/news/approveitems', isAdmin, news.approvelist);
     //app.post('/articles', authorization.requiresLogin, articles.create);
     app.post('/news', news.create);

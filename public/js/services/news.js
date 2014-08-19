@@ -4,7 +4,7 @@
 angular.module('mean.articles').factory('News', ['$resource', function ($resource) {
 
     return $resource('news/:newsId', {
-        articleId: '@_id'
+        newsId: '@_id'
     }, {
         update: {
             method: 'PUT'

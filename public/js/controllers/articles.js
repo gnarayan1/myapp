@@ -7,7 +7,7 @@ angular.module('mean.articles').controller('ArticlesController', ['$scope', '$ro
 
     $scope.intervalInMillis = 86400 * 1000 * 5; // 5 days in millis
 
-    $scope.categories = ['Staffing/HR', 'Organizational', 'Performance/Goals', 'Idea/Food for thought', 'Technology', 'Customer Concerns'  ];
+    $scope.categories = Global.categories;
 
     function parseISO8601(str) {
         // we assume str is a UTC date ending in 'Z'
