@@ -4,14 +4,6 @@
 var articles = require('../controllers/articles');
 var authorization = require('./middlewares/authorization');
 
-// Article authorization helpers
-var hasAuthorization = function (req, res, next) {
-    if (chkNotUsersArticle(req)) {
-        return res.send(401, 'User is not authorized');
-    }
-    next();
-};
-
 var chkNotUsersArticle = function(req) {
     return typeof req.user === 'undefined' || typeof req.article.user === 'undefined' ||  req.article.user.id !== req.user.id;
 };
@@ -20,6 +12,20 @@ var chkNotUsersArticle = function(req) {
 var chkNotAdmin = function(req) {
     return req.user && (req.user.admin !== true);
 };
+
+
+/*
+// Article authorization helpers
+var hasAuthorization = function (req, res, next) {
+    if (chkNotUsersArticle(req)) {
+        return res.send(401, 'User is not authorized');
+    }
+    next();
+};
+*/
+
+
+
 
 var isAdmin = function (req, res, next) {
     if (chkNotAdmin(req)) {

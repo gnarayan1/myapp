@@ -21,7 +21,7 @@ var CategorySchema = new Schema({
 /**
  * Validations
  */
-CategorySchema.path('name').validate(function (title) {
+CategorySchema.path('name').validate(function (name) {
     return name.length;
 }, 'Name cannot be blank');
 

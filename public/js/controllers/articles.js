@@ -18,7 +18,7 @@ angular.module('mean.articles').controller('ArticlesController', ['$scope', '$ro
             timeSubParts = timeParts[0].split(':'),
             timeSecParts = timeSubParts[2].split('.'),
             timeHours = Number(timeSubParts[0]),
-            _date = new Date;
+            _date = new Date();
 
         _date.setUTCFullYear(Number(dateParts[0]));
         _date.setUTCMonth(Number(dateParts[1]) - 1);
@@ -39,7 +39,7 @@ angular.module('mean.articles').controller('ArticlesController', ['$scope', '$ro
         var diff = createPlus5 - currDateinMillis;
         //console.log(diff);
         return diff / 1000;
-    }
+    };
 
     $scope.create = function () {
         var article = new Articles({

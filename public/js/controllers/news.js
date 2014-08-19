@@ -20,6 +20,7 @@ angular.module('mean.articles').controller('NewsController', ['$scope', '$routeP
 
         this.title = '';
         this.content = '';
+        this.category = '';
     };
 
     $scope.remove = function (news) {

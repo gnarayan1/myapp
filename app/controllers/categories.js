@@ -4,9 +4,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-    Category = mongoose.model('Category'),
-    _ = require('lodash');
-
+    Category = mongoose.model('Category');
 
 /**
  * List of Categories
