@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mean.news').controller('NewsController', ['$scope', '$routeParams', '$location', 'Global', 'News', 'Newsadmin', function ($scope, $routeParams, $location, Global, News, Newsadmin) {
+angular.module('mean.articles').controller('NewsController', ['$scope', '$routeParams', '$location', 'Global', 'News', 'Newsadmin', function ($scope, $routeParams, $location, Global, News, Newsadmin) {
     $scope.global = Global;
 
     $scope.clicked = false;
