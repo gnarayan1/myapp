@@ -1,0 +1,20 @@
+<section data-ng-controller="StarController" data-ng-init="findOne()">
+    <span>{{star.created | date:'medium'}}</span> /
+    <span>{{star.user.name}}</span>
+
+    <h2>{{star.title}}</h2>
+
+    <div data-ng-show="global.user && ((star.user && global.user._id == star.user._id) || global.user.admin == true)">
+        <a class="btn" href="/#!/star/{{star._id}}/edit">
+            <i class="glyphicon glyphicon-edit"></i>
+        </a>
+        <a class="btn" data-ng-click="remove(star);">
+            <i class="glyphicon glyphicon-trash"></i>
+        </a>
+    </div>
+    <div>{{star.content}}</div>
+
+    <div style="display: inline-block">
+        <a href="#!/star">Back to star</a>
+    </div>
+</section>

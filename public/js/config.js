@@ -32,6 +32,17 @@ angular.module('mean').config(['$routeProvider',
             }).
             when('/news/:newsId', {
                 templateUrl: 'views/news/view.html'
+            }).when('/star', {
+                templateUrl: 'views/star/list.html'
+            }).
+            when('/star/create', {
+                templateUrl: 'views/star/create.html'
+            }).
+            when('/star/:starId/edit', {
+                templateUrl: 'views/star/edit.html'
+            }).
+            when('/star/:starId', {
+                templateUrl: 'views/star/view.html'
             }).
             otherwise({
                 redirectTo: '/'

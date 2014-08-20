@@ -1,0 +1,23 @@
+<section data-ng-controller="StarController" data-ng-init="find()">
+    <ul class="star unstyled">
+        <li data-ng-repeat="star in staritems">
+            <span>{{star.created | date:'medium'}}</span> /
+            <span>{{star.user.name}}</span>
+
+            <h2><a data-ng-href="#!/star/{{star._id}}">{{star.title}}</a></h2>
+
+            <div>{{star.content}}</div>
+            <div>Category: {{star.category}}</div>
+            <div data-ng-show="global.user && ((star.user && global.user._id == star.user._id) || global.user.admin == true)">
+                <a class="btn" href="/#!/star/{{star._id}}/edit">
+                    <i class="glyphicon glyphicon-edit"></i>
+                </a>
+                <a class="btn" data-ng-click="remove(star);">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </a>
+            </div>
+        </li>
+    </ul>
+    <h1 data-ng-hide="!staritems || staritems.length">No star yet. <br> Why don't you <a href="/#!/star/create">Create
+        One</a>?</h1>
+</section>
