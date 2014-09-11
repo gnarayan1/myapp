@@ -7,26 +7,14 @@ var mongoose = require('mongoose'),
     GitHubStrategy = require('passport-github').Strategy,
     GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
     LinkedinStrategy = require('passport-linkedin').Strategy,
+    LdapStrategy = require('passport-ldapauth').Strategy,
     User = mongoose.model('User'),
     config = require('./config');
 
 
 module.exports = function (passport) {
 
-    // Serialize the user id to push into the session
-    passport.serializeUser(function (user, done) {
-        done(null, user.id);
-    });
 
-    // Deserialize the user object based on a pre-serialized token
-    // which is the user id
-    passport.deserializeUser(function (id, done) {
-        User.findOne({
-            _id: id
-        }, '-salt -hashed_password', function (err, user) {
-            done(err, user);
-        });
-    });
 
     // Use local strategy
     passport.use(new LocalStrategy({
@@ -54,6 +42,46 @@ module.exports = function (passport) {
             });
         }
     ));
+
+
+    // Use LDAP strategy
+    passport.use(new LdapStrategy({
+            usernameField: 'username',
+            passwordField: 'password',
+            server: {
+                url: config.ldap.url,
+                adminDn: config.ldap.adminDn,
+                adminPassword: config.ldap.adminPassword,
+                searchBase: config.ldap.searchBase,
+                searchFilter: config.ldap.searchFilter
+            }
+
+        },
+        function (profile, done) {
+            User.findOne({
+                'username': profile.uid
+            }, function (err, user) {
+                if (err) {
+                    return done(err);
+                }
+                if (!user) {
+                    user = new User({
+                        name: profile.displayName,
+                        username: profile.uid,
+                        provider: 'ldap',
+                        email: profile.mail
+                    });
+                    user.save(function (err) {
+                        if (err) console.log(err);
+                        return done(err, user);
+                    });
+                } else {
+                    return done(err, user);
+                }
+            });
+        }
+    ));
+
 
     // Use twitter strategy
     passport.use(new TwitterStrategy({
@@ -204,4 +232,23 @@ module.exports = function (passport) {
             });
         }
     ));
+
+    // Serialize the user id to push into the session
+    passport.serializeUser(function (user, done) {
+
+        done(null, user._id);
+    });
+
+    // Deserialize the user object based on a pre-serialized token
+    // which is the user id
+    passport.deserializeUser(function (id, done) {
+
+        User.findOne({
+            _id: id
+        }, '-salt -hashed_password', function (err, user) {
+            done(err, user);
+        });
+    });
+
+
 };

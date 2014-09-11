@@ -29,5 +29,12 @@ module.exports = {
         clientID: 'API_KEY',
         clientSecret: 'SECRET_KEY',
         callbackURL: 'http://localhost:3000/auth/linkedin/callback'
+    },
+    ldap: {
+        url: 'ldap://172.28.113.42:389',
+        //adminDn: 'uid=admin,ou=administrators,ou=topologymanagement,o=netscaperoot',
+        //adminPassword: 'TESTzxcv1234',
+        searchBase: 'ou=People,dc=7ticks,dc=intdata,dc=com',
+        searchFilter: '(uid={{username}})'
     }
 };

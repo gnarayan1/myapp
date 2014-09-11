@@ -5,14 +5,14 @@ var news = require('../controllers/news');
 var authorization = require('./middlewares/authorization');
 
 /*
-// News authorization helpers
-var hasAuthorization = function (req, res, next) {
-    if (chkNotUsersNews(req)) {
-        return res.send(401, 'User is not authorized');
-    }
-    next();
-};
-*/
+ // News authorization helpers
+ var hasAuthorization = function (req, res, next) {
+ if (chkNotUsersNews(req)) {
+ return res.send(401, 'User is not authorized');
+ }
+ next();
+ };
+ */
 
 var chkNotUsersNews = function (req) {
     return typeof req.user === 'undefined' || typeof req.news.user === 'undefined' || req.news.user.id !== req.user.id;

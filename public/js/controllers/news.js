@@ -81,8 +81,6 @@ angular.module('mean.articles').controller('NewsController', ['$scope', '$routeP
     };
 
 
-
-
     $scope.findOne = function () {
         News.get({
             newsId: $routeParams.newsId
