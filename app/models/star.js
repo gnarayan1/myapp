@@ -25,6 +25,11 @@ var StarSchema = new Schema({
         default: '',
         trim: true
     },
+    title: {
+        type: String,
+        default: '',
+        trim: true
+    },
     names: { type : Array , "default" : [] },
     user: {
         type: Schema.ObjectId,
