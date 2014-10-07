@@ -217,7 +217,8 @@ module.exports = function (passport) {
             }, function (err, user) {
                 if (!user) {
                     user = new User({
-                        name: profile.displayName,
+                        //name: profile.displayName,
+                        name: profile.cn,
                         email: profile.emails[0].value,
                         username: profile.emails[0].value,
                         provider: 'linkedin'

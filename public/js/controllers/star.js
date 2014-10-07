@@ -17,7 +17,7 @@ angular.module('mean.articles').controller('StarController', ['$scope', '$routeP
 
         this.title = '';
         this.content = '';
-        this.category = '';
+
     };
 
     $scope.remove = function (star) {
